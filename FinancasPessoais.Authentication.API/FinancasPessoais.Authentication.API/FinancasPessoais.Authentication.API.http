@@ -1,0 +1,6 @@
+@FinancasPessoais.Authentication.API_HostAddress = http://localhost:5133
+
+GET {{FinancasPessoais.Authentication.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

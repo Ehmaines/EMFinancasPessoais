@@ -1,0 +1,63 @@
+####################################################
+## Build e Runtime
+####################################################
+# Pasta de saída da build
+bin/
+obj/
+
+####################################################
+## Visual Studio
+####################################################
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+####################################################
+## Arquivos do pacote NuGet
+####################################################
+# Pacotes baixados via NuGet
+packages/
+
+# Pasta gerada com a restauração dos pacotes
+.nuget/
+
+####################################################
+## Publicação da Aplicação
+####################################################
+# Pasta gerada durante a publicação da aplicação
+publish/
+
+####################################################
+## Logs e outros arquivos temporários
+####################################################
+*.log
+*.tmp
+*.temp
+
+####################################################
+## Configurações específicas do sistema operacional
+####################################################
+# Arquivos de cache do macOS
+.DS_Store
+
+# Arquivos de cache do Windows
+Thumbs.db
+ehthumbs.db
+
+####################################################
+## Outros
+####################################################
+# Arquivos gerados por ferramentas de análise de código
+*.codeanalysis
+
+# Arquivos de configurações pessoais do Visual Studio Code
+.vscode/
+
+# Arquivos de cache do Rider
+.idea/
+
+# Arquivos temporários diversos
+*_ReSharper*/
+*.resharper
