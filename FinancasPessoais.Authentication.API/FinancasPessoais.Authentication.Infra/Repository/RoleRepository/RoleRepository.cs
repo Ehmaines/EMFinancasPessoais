@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinancasPessoais.Authentication.Infra.Repository.RoleRepository
 {
-    public class RoleRepository(FinancasPessoaisDbContext context) : BaseRepository<User>(context), IRoleRepository
+    public class RoleRepository(FinancasPessoaisDbContext context) : BaseRepository<Role>(context), IRoleRepository
     {
         public async Task<Role> GetByName(string name)
         {

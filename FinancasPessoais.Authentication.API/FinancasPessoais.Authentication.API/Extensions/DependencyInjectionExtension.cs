@@ -8,6 +8,8 @@ using FinancasPessoais.Authentication.Application.Common;
 using FinancasPessoais.Authentication.Domain.Modules.Users;
 using FinancasPessoais.Authentication.Domain.Modules.Roles;
 using FinancasPessoais.Authentication.Infra.Repository.RoleRepository;
+using FinancasPessoais.Authentication.Domain.Modules.Token;
+using FinancasPessoais.Authentication.Infra.Repository.RequestPasswordTokenRepository;
 
 namespace FinancasPessoais.Authentication.API.Extensions
 {
@@ -19,6 +21,7 @@ namespace FinancasPessoais.Authentication.API.Extensions
             builder.Services.AddTransient<IRoleRepository, RoleRepository>();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<IGenerateToken, GenerateToken>();
+            builder.Services.AddTransient<IRequestPasswordTokenRepository, RequestPasswordTokenRepository>();
 
             builder.AddMediatR();
         }

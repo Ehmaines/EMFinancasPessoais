@@ -30,7 +30,6 @@ namespace FinancasPessoais.Authentication.API.Extensions
 
             // Adicionar serviços de autorização
             builder.Services.AddAuthorization();
-
         }
     }
 }

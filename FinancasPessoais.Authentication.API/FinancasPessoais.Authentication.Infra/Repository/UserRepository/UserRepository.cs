@@ -10,5 +10,10 @@ namespace FinancasPessoais.Authentication.Infra.Repository.UserRepository
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
         }
+
+        public async Task<User> GetByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
+        }
     }
 }

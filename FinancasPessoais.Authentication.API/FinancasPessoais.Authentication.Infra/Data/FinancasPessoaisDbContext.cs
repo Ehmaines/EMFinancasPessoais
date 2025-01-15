@@ -1,4 +1,5 @@
 ﻿using FinancasPessoais.Authentication.Domain.Modules.Roles;
+using FinancasPessoais.Authentication.Domain.Modules.Token;
 using FinancasPessoais.Authentication.Domain.Modules.Users;
 using FinancasPessoais.Authentication.Infra.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace FinancasPessoais.Authentication.Infra.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<RequestPasswordToken> RequestPasswordTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,6 +22,8 @@ namespace FinancasPessoais.Authentication.Infra.Data
             UserConfiguration.configure(modelBuilder);
             //RoleModule
             RoleConfiguration.configure(modelBuilder);
+            //RequestPasswordTokenModule
+            RequestPasswordTokenConfiguration.configure(modelBuilder);
         }
     }
 }

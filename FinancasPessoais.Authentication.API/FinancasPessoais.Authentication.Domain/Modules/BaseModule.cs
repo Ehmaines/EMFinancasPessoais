@@ -12,9 +12,6 @@ namespace FinancasPessoais.Authentication.Domain.Modules
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        public BaseModule()
-        {
-
-        }
+        public BaseModule() { }
     }
 }

@@ -10,5 +10,6 @@ namespace FinancasPessoais.Authentication.Domain.Modules.Users
     public interface IUserRepository : IBaseRepository<User>
     {
         Task<User> Authenticate(string email, string password);
+        Task<User> GetByEmailAsync(string email);
     }
 }

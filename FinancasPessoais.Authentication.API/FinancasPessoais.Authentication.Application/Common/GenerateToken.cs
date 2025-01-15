@@ -39,5 +39,28 @@ namespace FinancasPessoais.Authentication.Application.Common
                 Expiration = DateTime.UtcNow.AddHours(2)
             });
         }
+
+        public Task<PasswordRequestTokenResult> GeneratePasswordRequestToken(User user)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
+            var Createdtoken = tokenHandler.CreateToken(new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Email, user.Email),
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(15),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)), SecurityAlgorithms.HmacSha256Signature)
+            });
+
+            var token = tokenHandler.WriteToken(Createdtoken);
+
+            return Task.FromResult(new PasswordRequestTokenResult
+            {
+                Token = token,
+                Expiration = DateTime.UtcNow.AddMinutes(15)
+            });
+        }
     }
 }
