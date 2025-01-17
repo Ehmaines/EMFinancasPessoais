@@ -1,5 +1,6 @@
 ﻿using FinancasPessoais.Authentication.Application.Commands.Login;
 using FinancasPessoais.Authentication.Domain.Common;
+using FinancasPessoais.Authentication.Domain.Email;
 using FinancasPessoais.Authentication.Domain.Modules.Token;
 using FinancasPessoais.Authentication.Domain.Modules.Users;
 using MediatR;
@@ -16,11 +17,13 @@ namespace FinancasPessoais.Authentication.Application.Commands.Password
         private readonly IUserRepository _userRepository;
         private readonly IGenerateToken _generateToken;
         private readonly IRequestPasswordTokenRepository _requestPasswordTokenRepository;
-        public RequestPasswordCommandHandler(IUserRepository userRepository, IGenerateToken generateToken, IRequestPasswordTokenRepository requestPasswordTokenRepository)
+        private readonly IEmailService _emailService;
+        public RequestPasswordCommandHandler(IUserRepository userRepository, IGenerateToken generateToken, IRequestPasswordTokenRepository requestPasswordTokenRepository, IEmailService emailService)
         {
             _userRepository = userRepository;
             _generateToken = generateToken;
             _requestPasswordTokenRepository = requestPasswordTokenRepository;
+            _emailService = emailService;
         }
 
         public Task<RequestPasswordToken> Handle(RequestPasswordCommand request, CancellationToken cancellationToken)
@@ -38,6 +41,8 @@ namespace FinancasPessoais.Authentication.Application.Commands.Password
                 UserId = user.Id,
                 Expiration = token.Expiration
             });
+
+            _emailService.SendEmailAsync(user, token.Token, token.Expiration);
 
             return Task.FromResult<RequestPasswordToken>(tokenCreated);
         }
