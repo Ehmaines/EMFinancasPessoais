@@ -1,13 +1,8 @@
 ﻿using FinancasPessoais.Authentication.Domain.Email;
 using FinancasPessoais.Authentication.Domain.Modules.Users;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FinancasPessoais.Authentication.Application.Email
 {
@@ -21,7 +16,7 @@ namespace FinancasPessoais.Authentication.Application.Email
             _configuration = configuration;
         }
 
-        public Task SendEmailAsync(User user, string token, DateTime tokenExpiration)
+        public Task SendEmailAsync(User user, string tinyUrl, DateTime tokenExpiration)
         {
             try
             {
@@ -31,7 +26,7 @@ namespace FinancasPessoais.Authentication.Application.Email
                 MailMessage mail = new MailMessage(sender, user.Email);
                 mail.Subject = "Recuperação de senha";
                 mail.IsBodyHtml = true;
-                mail.Body = $"<h1>Recuperação de senha</h1><p>Olá {user.Name} <br> Clique no link para recuperar sua senha: <a href='{apiUrl}password/reset?token={token}'>Recuperar senha</a></p><br><br><p>O Token irá expirar em 15 minutos";
+                mail.Body = $"<h1>Recuperação de senha</h1><p>Olá {user.Name} <br> Clique no link para recuperar sua senha: <a href='{apiUrl}password/?url={tinyUrl}'>Recuperar senha</a></p><br><br><p>O Token irá expirar em 15 minutos";
                 mail.SubjectEncoding = Encoding.UTF8;
                 mail.BodyEncoding = Encoding.UTF8;
 

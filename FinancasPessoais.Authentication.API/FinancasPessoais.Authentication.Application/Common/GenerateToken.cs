@@ -2,13 +2,9 @@
 using FinancasPessoais.Authentication.Domain.Common;
 using FinancasPessoais.Authentication.Domain.Modules.Users;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FinancasPessoais.Authentication.Application.Common
 {
@@ -40,7 +36,7 @@ namespace FinancasPessoais.Authentication.Application.Common
             });
         }
 
-        public Task<PasswordRequestTokenResult> GeneratePasswordRequestToken(User user)
+        public Task<PasswordRequestTokenResult> GeneratePasswordRequestToken(User user, string tinyUrl)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
@@ -48,7 +44,7 @@ namespace FinancasPessoais.Authentication.Application.Common
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim("tinyEmail", tinyUrl+";"+user.Email),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)), SecurityAlgorithms.HmacSha256Signature)
@@ -61,6 +57,14 @@ namespace FinancasPessoais.Authentication.Application.Common
                 Token = token,
                 Expiration = DateTime.UtcNow.AddMinutes(15)
             });
+        }
+
+        public IEnumerable<Claim>? Validate(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwt = handler.ReadJwtToken(token);
+
+            return jwt.Claims;
         }
     }
 }

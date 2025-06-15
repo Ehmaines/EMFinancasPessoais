@@ -4,16 +4,19 @@ using FinancasPessoais.Authentication.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FinancasPessoais.Authentication.Domain.Migrations
+namespace FinancasPessoais.Authentication.Infra.Migrations
 {
     [DbContext(typeof(FinancasPessoaisDbContext))]
-    partial class FinancasPessoaisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250511222102_ChangeTokenToHash")]
+    partial class ChangeTokenToHash
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,7 @@ namespace FinancasPessoais.Authentication.Domain.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 12, 0, 11, 13, 171, DateTimeKind.Utc).AddTicks(683));
+                        .HasDefaultValue(new DateTime(2025, 5, 11, 22, 21, 2, 146, DateTimeKind.Utc).AddTicks(7002));
 
                     b.Property<DateTime>("Expiration")
                         .HasColumnType("datetime2");
@@ -62,7 +65,7 @@ namespace FinancasPessoais.Authentication.Domain.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 12, 0, 11, 13, 171, DateTimeKind.Utc).AddTicks(1047));
+                        .HasDefaultValue(new DateTime(2025, 5, 11, 22, 21, 2, 146, DateTimeKind.Utc).AddTicks(7459));
 
                     b.Property<DateTime>("UsedAt")
                         .HasColumnType("datetime2");
@@ -86,7 +89,7 @@ namespace FinancasPessoais.Authentication.Domain.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 11, 21, 11, 13, 170, DateTimeKind.Local).AddTicks(8158));
+                        .HasDefaultValue(new DateTime(2025, 5, 11, 19, 21, 2, 146, DateTimeKind.Local).AddTicks(4587));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -106,7 +109,7 @@ namespace FinancasPessoais.Authentication.Domain.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 5, 11, 21, 11, 13, 170, DateTimeKind.Local).AddTicks(8521));
+                        .HasDefaultValue(new DateTime(2025, 5, 11, 19, 21, 2, 146, DateTimeKind.Local).AddTicks(5023));
 
                     b.HasKey("Id");
 

@@ -1,9 +1,4 @@
 ﻿using FinancasPessoais.Authentication.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinancasPessoais.Authentication.Domain.Modules.Users
 {
@@ -11,5 +6,7 @@ namespace FinancasPessoais.Authentication.Domain.Modules.Users
     {
         Task<User> Authenticate(string email, string password);
         Task<User> GetByEmailAsync(string email);
+        Task<User> GetByIdAsync(Guid id);
+        Task<bool> UpdatePassword(User user, string newPassword);
     }
 }

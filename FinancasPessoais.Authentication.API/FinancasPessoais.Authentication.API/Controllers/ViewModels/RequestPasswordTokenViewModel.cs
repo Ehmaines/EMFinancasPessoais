@@ -2,7 +2,7 @@
 {
     public class RequestPasswordTokenViewModel
     {
-        public string Token { get; set; }
+        public string Hash { get; set; }
         public DateTime Expiration { get; set; }
     }
 }

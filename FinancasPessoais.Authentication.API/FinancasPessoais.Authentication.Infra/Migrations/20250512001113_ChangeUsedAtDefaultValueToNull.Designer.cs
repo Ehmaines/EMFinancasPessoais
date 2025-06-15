@@ -4,16 +4,19 @@ using FinancasPessoais.Authentication.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FinancasPessoais.Authentication.Domain.Migrations
+namespace FinancasPessoais.Authentication.Infra.Migrations
 {
     [DbContext(typeof(FinancasPessoaisDbContext))]
-    partial class FinancasPessoaisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250512001113_ChangeUsedAtDefaultValueToNull")]
+    partial class ChangeUsedAtDefaultValueToNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

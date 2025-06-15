@@ -3,8 +3,8 @@ using MediatR;
 
 namespace FinancasPessoais.Authentication.Application.Commands.Password
 {
-    public class RequestPasswordCommand: IRequest<RequestPasswordToken>
+    public class GetTokenAndHashByUrlCommand : IRequest<RequestPasswordToken>
     {
-        public string Email { get; set; }
+        public string TinyUrl { get; set; }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using FinancasPessoais.Authentication.Domain.Modules.Roles;
 using FinancasPessoais.Authentication.Domain.Modules.Token;
 using FinancasPessoais.Authentication.Infra.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinancasPessoais.Authentication.Infra.Repository.RequestPasswordTokenRepository
 {
@@ -18,9 +14,25 @@ namespace FinancasPessoais.Authentication.Infra.Repository.RequestPasswordTokenR
             return useradded.Entity;
         }
 
+        public bool ExistsUrl(string tinyUrl)
+        {
+            return context.RequestPasswordTokens.Any(x => x.TinyUrl == tinyUrl);
+        }
+
+        public Task<RequestPasswordToken> GetByUrl(string tinyUrl)
+        {
+            return context.RequestPasswordTokens.FirstOrDefaultAsync(x => x.TinyUrl == tinyUrl);
+        }
+
+        public Task Update(object requestPasswordToken)
+        {
+            return null;
+        }
+
         public Task<RequestPasswordToken> GetByToken(string token)
         {
             throw new NotImplementedException();
         }
+
     }
 }

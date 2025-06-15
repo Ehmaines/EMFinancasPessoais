@@ -1,14 +1,9 @@
-﻿using FinancasPessoais.Authentication.Application.Commands.Login;
+﻿using FinancasPessoais.Authentication.Application.Common;
 using FinancasPessoais.Authentication.Domain.Common;
 using FinancasPessoais.Authentication.Domain.Email;
 using FinancasPessoais.Authentication.Domain.Modules.Token;
 using FinancasPessoais.Authentication.Domain.Modules.Users;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinancasPessoais.Authentication.Application.Commands.Password
 {
@@ -33,16 +28,18 @@ namespace FinancasPessoais.Authentication.Application.Commands.Password
             {
                 return Task.FromResult<RequestPasswordToken>(null);
             }
-            var token = _generateToken.GeneratePasswordRequestToken(user).Result;
-
+            var tinyUrl = TinyUrlGenerator.GenerateUnique(_requestPasswordTokenRepository);
+            var token = _generateToken.GeneratePasswordRequestToken(user, tinyUrl).Result;
+            var hash = Cryptography.Encrypt(token.Token);
             var tokenCreated = _requestPasswordTokenRepository.Create(new RequestPasswordToken
             {
-                Token = token.Token,
+                Hash = hash,
                 UserId = user.Id,
-                Expiration = token.Expiration
+                Expiration = token.Expiration,
+                TinyUrl = tinyUrl,
             });
 
-            _emailService.SendEmailAsync(user, token.Token, token.Expiration);
+            _emailService.SendEmailAsync(user, tinyUrl, token.Expiration);
 
             return Task.FromResult<RequestPasswordToken>(tokenCreated);
         }

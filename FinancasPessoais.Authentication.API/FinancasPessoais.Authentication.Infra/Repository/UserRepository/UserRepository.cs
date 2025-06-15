@@ -15,5 +15,27 @@ namespace FinancasPessoais.Authentication.Infra.Repository.UserRepository
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
         }
+
+        public async Task<User> GetByIdAsync(Guid id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id.Equals(id));
+        }
+
+        public async Task<bool> UpdatePassword(User user, string newPassword)
+        {
+            try
+            {
+                user.Password = newPassword;
+                _context.Users.Update(user);
+
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
